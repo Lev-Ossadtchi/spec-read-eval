@@ -1,2 +1,6 @@
 *.pdf
 __pycache__/
+
+# веса распознавателя: 15 МБ, собираются отдельным проектом cad-ocr-finetune
+model.onnx
+model.chars.json

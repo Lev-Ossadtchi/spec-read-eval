@@ -30,7 +30,12 @@ def measure(pdf: Path, reader, check: bool, own: bool = False) -> dict:
     гигабайта с torch). Ради поставки заказчику важно знать не «работает ли
     распознавание вообще», а сколько теряется при переходе на лёгкую."""
     items = []
-    for page in range(2):
+    # Страниц в листе столько, сколько их в файле: 48 позиций по 20 строк
+    # дают три. Пока здесь стояла двойка, треть позиций молча считалась
+    # непрочитанной, и замер занижал сам себя.
+    import pymupdf
+    pages = pymupdf.open(str(pdf)).page_count
+    for page in range(pages):
         gray, angle = S.page_image(str(pdf), page, with_angle=True)
         ys, xs = S.grid(gray)
         got = (S.cells_pdf(str(pdf), page, ys, xs, reader, gray=gray, angle=angle) if own

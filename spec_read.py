@@ -240,7 +240,7 @@ def mass_of(note: str) -> tuple[float | None, float | None]:
 
 # Колонки, как они идут в спецификации ГОСТ 2.106 слева направо. Нулевая —
 # боковая полоса рамки чертежа, данных в ней нет.
-# Проверено на рабочих листах 29.09.2026: нулевая колонка — боковая
+# Проверено на листах рамы кантователя 29.09.2026: нулевая колонка — боковая
 # полоса рамки, первая пустая, дальше формат, зона, позиция, обозначение,
 # наименование, количество, примечание.
 # Отсчёт идёт от правого края таблицы, а не от левого. Слева у листа полосы
@@ -396,7 +396,8 @@ def read_spec(pdf: str, pages: range, reader, own: bool = False) -> list[dict]:
 
 
 if __name__ == "__main__":
-    pdf = sys.argv[1] if len(sys.argv) > 1 else "scan_средний.pdf"
+    pdf = sys.argv[1] if len(sys.argv) > 1 else \
+        "materials/2-2141-0.00.00 Рама кантователя Vai Cosim (1) (1).pdf"
     page = int(sys.argv[2]) if len(sys.argv) > 2 else 1
     import easyocr
     reader = easyocr.Reader(["ru"], gpu=False, verbose=False)
